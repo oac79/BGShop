@@ -6,9 +6,9 @@ import com.oach.boardgame.app.models.Artist;
 
 public interface IArtistService {
 
-	Artist createDesigner(Artist artist);
+	Artist createArtist(Artist artist);
 	
-	List<Artist> getAllArtist();
+	List<Artist> getAllArtists();
 	
 	Artist getArtistById(String id);
 	

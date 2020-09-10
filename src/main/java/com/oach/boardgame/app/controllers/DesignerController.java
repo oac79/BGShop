@@ -21,7 +21,7 @@ import com.oach.boardgame.app.models.Designer;
 import com.oach.boardgame.app.services.IDesignerService;
 
 @RestController
-@RequestMapping("/api-designer")
+@RequestMapping("/boardGames")
 public class DesignerController {
 
 	@Autowired
@@ -32,12 +32,12 @@ public class DesignerController {
 		return service.getAllDesigners();
 	}
 	
-	@GetMapping("/designer-id/{id}")
+	@GetMapping("/designers/{id}")
 	public Designer getDesigner(@PathVariable("id") String id) {
 		return service.getDesignerById(id);
 	}
 	
-	@PostMapping("/designer")
+	@PostMapping("/designers")
 	public ResponseEntity<Designer> createDesigner(@Validated @RequestBody Designer designer) {
 		Designer savedDesigner = service.createDesigner(designer);
 		//CREATED
@@ -46,8 +46,8 @@ public class DesignerController {
 		return new ResponseEntity<Designer>(savedDesigner, HttpStatus.CREATED);
 	}
 	
-	@PutMapping("designer-id/{id}")
-	public ResponseEntity<Designer> updateDesignerById(@Validated @RequestBody Designer designer, @PathVariable("id") String id){
+	@PutMapping("designers/{id}")
+	public ResponseEntity<Designer> updateDesigner(@Validated @RequestBody Designer designer, @PathVariable("id") String id){
 		designer.setId(id);
 		Designer designerUpdated = service.updateDesignerById(designer);
 		if(designerUpdated != null) {
@@ -56,8 +56,8 @@ public class DesignerController {
 		return new ResponseEntity<Designer>(HttpStatus.NOT_FOUND);
 	}
 	
-	@DeleteMapping("designer-id/{id}")
-	public ResponseEntity<Designer> deleteDesignerById(@PathVariable("id") String id){
+	@DeleteMapping("designers/{id}")
+	public ResponseEntity<Designer> deleteDesigner(@PathVariable("id") String id){
 		if(service.deleteDesignerById(id)) {
 			return new ResponseEntity<Designer>(HttpStatus.NO_CONTENT);
 		}

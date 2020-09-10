@@ -1,16 +1,24 @@
 package com.oach.boardgame.app.models;
 
+import java.util.List;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "Artists")
 public class Artist extends Person {
 
+	@Id
 	private String id;
 
-	/*
-	 * @DBRef private List<BoardGame> boardGames;
-	 */
+	@DBRef
+	private List<BoardGame> boardGames;
 
-	public Artist(String id, String name, String lastName) {
+	public Artist(String id, String name, String lastName, List<BoardGame> boardGames) {
 		super(name, lastName); // llama al constructor de la clase padre
 		this.id = id;
+		this.boardGames = boardGames;
 	}
 
 	public String getId() {
@@ -21,7 +29,8 @@ public class Artist extends Person {
 		this.id = id;
 	}
 
-	/*
-	 * public List<BoardGame> getBoardGames() { return boardGames; }
-	 */
+	public List<BoardGame> getBoardGames() {
+		return boardGames;
+	}
+
 }

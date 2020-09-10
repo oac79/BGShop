@@ -1,7 +1,5 @@
 package com.oach.boardgame.app.services.impl;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +12,6 @@ import com.oach.boardgame.app.services.IDesignerService;
 @Service
 public class DesignerServiceImpl implements IDesignerService {
 	
-	private static List<Designer> designers = new ArrayList<>();
-	
-	static 
-	{
-		designers.add(new Designer("001", "Jan", "Oldman"));
-		designers.add(new Designer("002", "Mark", "Math"));
-	}
-
 	@Autowired
 	private IDesignerRepository repository;
 
@@ -33,7 +23,6 @@ public class DesignerServiceImpl implements IDesignerService {
 	@Override
 	public List<Designer> getAllDesigners() {
 		return repository.findAll();
-		//return designers;
 	}
 
 	@Override

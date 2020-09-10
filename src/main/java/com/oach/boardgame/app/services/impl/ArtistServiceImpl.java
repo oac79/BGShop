@@ -1,6 +1,5 @@
 package com.oach.boardgame.app.services.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,28 +12,17 @@ import com.oach.boardgame.app.services.IArtistService;
 @Service
 public class ArtistServiceImpl implements IArtistService {
 	
-	private static List<Artist> artists = new ArrayList<>();
-	
-	static 
-	{
-		artists.add(new Artist("art001", "Markus","Klein"));
-		artists.add(new Artist("art002", "Raymond","Clerk"));
-		artists.add(new Artist("art003", "Steve","Land"));
-	}
-
 	@Autowired
 	IArtistRepository repository;
 	
 	@Override
-	public Artist createDesigner(Artist artist) {
-		// TODO Auto-generated method stub
+	public Artist createArtist(Artist artist) {
 		return repository.insert(artist);
 	}
 
 	@Override
-	public List<Artist> getAllArtist() {
-		//return repository.findAll();
-		return artists;
+	public List<Artist> getAllArtists() {
+		return repository.findAll();
 	}
 
 	@Override
