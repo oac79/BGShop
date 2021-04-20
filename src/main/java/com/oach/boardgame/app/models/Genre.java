@@ -4,7 +4,8 @@ public enum Genre {
 
 	Family,
 	Abstract,
-	Thematic, 
+	Thematic,
+	Filler,
 	Eurogame, 
 	Wargame
 	

@@ -1,8 +1,12 @@
 package com.oach.boardgame.app.models;
 
+import java.util.Date;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Document(collection = "BoardGames")
 public class BoardGame {
@@ -10,33 +14,27 @@ public class BoardGame {
 	private String id;
 	@Indexed(unique = true)
 	private String title;
-	private int year;
+	@JsonFormat(pattern="dd-MM-yyyy")
+	private Date publicationDate;
 	private String players;
 	private Genre genre;
-	private Designer designer;
-	private Artist artist;
 	private String description;
 	private int stock;
 	private double price;
-	
-	public BoardGame() {
-		
-	}
+	private String image;
 
-	public BoardGame(String id, String title, int year, String players, 
-					Genre genre, Designer designer, Artist artist,
-					String description, int stock, double price) {
+	public BoardGame(String id, String title, String players, 
+					 Genre genre, String description, int stock, double price, String image) {
 	
 		this.id = id;
 		this.title = title;
-		this.year = year;
+		this.publicationDate = new Date();
 		this.players = players;
 		this.genre = genre;
-		this.designer = designer;
-		this.artist = artist;
 		this.description = description;
 		this.stock = stock;
 		this.price = price;
+		this.image = image;	
 	}
 
 	public String getId() {
@@ -55,12 +53,12 @@ public class BoardGame {
 		this.title = title;
 	}
 
-	public int getYear() {
-		return year;
+	public Date getPublicationDate() {
+		return publicationDate;
 	}
 
-	public void setYear(int year) {
-		this.year = year;
+	public void setPublicationDate(Date publicationDate) {
+		this.publicationDate = publicationDate;
 	}
 
 	public String getPlayers() {
@@ -99,12 +97,12 @@ public class BoardGame {
 		return genre;
 	}
 
-	public Designer getDesigner() {
-		return designer;
+	public String getImage() {
+		return image;
 	}
 
-	public Artist getArtist() {
-		return artist;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 }

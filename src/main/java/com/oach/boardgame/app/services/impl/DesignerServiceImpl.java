@@ -1,10 +1,12 @@
 package com.oach.boardgame.app.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.oach.boardgame.app.models.BoardGame;
 import com.oach.boardgame.app.models.Designer;
 import com.oach.boardgame.app.repositories.IDesignerRepository;
 import com.oach.boardgame.app.services.IDesignerService;
@@ -45,6 +47,17 @@ public class DesignerServiceImpl implements IDesignerService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public Designer addToDesignerNewBoardGame(Designer designer, BoardGame boardGame) {
+		if(repository.existsById(designer.getId()) && repository.existsById(boardGame.getId())) {
+			List<BoardGame> boardGames = new ArrayList<>();
+			boardGames.add(boardGame);
+			designer.setBoardGames(boardGames);
+			return repository.save(designer);
+			}
+		return null;
 	}
 
 }

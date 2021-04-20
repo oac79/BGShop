@@ -20,6 +20,7 @@ public class Designer extends Person {
 		this.id = id;
 		this.boardGames=boardGames;
 	}
+	
 
 	public String getId() {
 		return id;
@@ -33,7 +34,8 @@ public class Designer extends Person {
 		return boardGames;
 	}
 	
-
-	
+	public void setBoardGames(List<BoardGame> boardGames) {
+		this.boardGames = boardGames;
+	}
 	
 }

@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.oach.boardgame.app.models.Artist;
-import com.oach.boardgame.app.services.IArtistService;
+import com.oach.boardgame.app.services.impl.ArtistServiceImpl;
 
 @RestController
 @RequestMapping("/boardGames")
 public class ArtistController {
 	
 	@Autowired
-	IArtistService service;
+	ArtistServiceImpl service;
 	
 	@GetMapping("/artists")
 	public List<Artist> getAllArtists() {
@@ -53,7 +53,7 @@ public class ArtistController {
 	}
 	
 	@DeleteMapping("/artists/{id}")
-	public ResponseEntity<Artist> deleteArtist(@PathVariable String id){
+	public ResponseEntity<Artist> deleteArtist(@PathVariable("id") String id){
 		if(service.deleteArtistById(id)) {
 			return new ResponseEntity<Artist>(HttpStatus.NO_CONTENT);
 		}

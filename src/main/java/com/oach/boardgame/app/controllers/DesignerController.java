@@ -16,16 +16,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.oach.boardgame.app.models.BoardGame;
 import com.oach.boardgame.app.models.Designer;
-import com.oach.boardgame.app.services.IDesignerService;
+import com.oach.boardgame.app.services.impl.DesignerServiceImpl;
 
 @RestController
 @RequestMapping("/boardGames")
 public class DesignerController {
 
 	@Autowired
-	private IDesignerService service;
+	private DesignerServiceImpl service;
 	
 	@GetMapping("/designers")
 	public List<Designer> getAllDesigners(){
@@ -54,6 +54,18 @@ public class DesignerController {
 			return new ResponseEntity<Designer>(designerUpdated, HttpStatus.OK);
 		}
 		return new ResponseEntity<Designer>(HttpStatus.NOT_FOUND);
+	}
+	
+	@PutMapping("designers/{id_designer}/{id_boardGame}")
+	public ResponseEntity<Designer> addBoardGame(@Validated @RequestBody Designer designer, @PathVariable("id_designer") String id_designer,
+												 @Validated @RequestBody BoardGame boardgame, @PathVariable("id_boardGame") String id_boardGame){
+				designer.setId(id_designer);
+				boardgame.setId(id_boardGame);
+				Designer designerAddBoardGame = service.addToDesignerNewBoardGame(designer, boardgame);
+				if(designerAddBoardGame != null) {
+					return new ResponseEntity<Designer>(designerAddBoardGame, HttpStatus.OK);
+				}
+				return new ResponseEntity<Designer>(HttpStatus.NOT_FOUND);
 	}
 	
 	@DeleteMapping("designers/{id}")
